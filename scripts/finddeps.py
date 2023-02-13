@@ -24,4 +24,4 @@ while stack:
         pass
 
 if res:
-    print reduce(lambda x, y: x + " " + y, res)
+    print(reduce(lambda x, y: x + " " + y, res))

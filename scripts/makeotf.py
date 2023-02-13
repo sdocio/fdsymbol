@@ -49,7 +49,7 @@ space = font.createChar(0x20, "space")
 space.width = 400
 
 # Map each glyph of the form sym0xx to uniE0xx
-for i in xrange(0x100): # Adapt if necessary
+for i in range(0x100): # Adapt if necessary
     glyphname = "sym{0:03X}".format(i)
     if glyphname in font:
         font[glyphname].unicode = 0xE000 + i
@@ -74,7 +74,7 @@ for glyph in font.glyphs():
     elif (glyphname.startswith("uni") and len(glyphname) > 7 and
           len(glyphname) % 4 == 3):
         components = ("uni" + glyphname[k:k + 4]
-                      for k in xrange(3, len(glyphname), 4))
+                      for k in range(3, len(glyphname), 4))
         addlig(components, glyph)
 
 # Read feature file
@@ -113,11 +113,11 @@ font.hhea_ascent = font.ascent + font.os2_typolinegap / 2
 font.hhea_descent = -(font.descent + font.os2_typolinegap / 2)
 
 # Vaildate and Write OTF file
-print "Validating font..."
+print("Validating font...")
 if font.validate() == 0:
     font.generate(args.otffile, flags=("opentype",))
-    print "Succesfully generated " + args.otffile + "."
+    print("Succesfully generated {}.".format(args.otffile))
     sys.exit(0)
 else:
-    print "Font did not validate. No OTF file generated."
+    print("Font did not validate. No OTF file generated.")
     sys.exit(1)
